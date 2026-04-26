@@ -21,7 +21,6 @@ def add():
         except ValueError:
             print("❌ Please enter a valid number.")
     
-    # Check if book already exists
     existing_book = None
     for book_id, book_info in books.items():
         if book_info["name"] == book_name:
