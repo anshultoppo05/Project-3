@@ -24,7 +24,6 @@ def show():
     
     print_separator()
     
-    # Show issued books if any
     if issued_books:
         print("\n" + "="*60)
         print("  CURRENTLY ISSUED BOOKS".center(60))

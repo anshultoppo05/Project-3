@@ -1,32 +1,14 @@
 from datetime import datetime, timedelta
 
-# ========== DATA STORAGE USING DICTIONARIES ==========
-# books: Dictionary with book_id as key and book details (dict) as value
-# Structure: {book_id: {"name": str, "copies": int, "issued_count": int}}
 
 books = {
-    # Example: 1: {"name": "Python Basics", "copies": 3, "issued_count": 0}
 }
-
-# issued_books: Dictionary with record_key as key and issue details (dict) as value
-# Structure: {record_key: {"book_id": int, "book_name": str, "student_name": str, 
-#                          "issue_date": str, "due_date": str, "return_date": str/None, 
-#                          "status": str, "days_issued": int}}
 
 issued_books = {
-    # Example: "PYTHON BASICS_STUDENT1_2024-04-22": {
-    #     "book_id": 1,
-    #     "book_name": "PYTHON BASICS",
-    #     "student_name": "STUDENT1",
-    #     "issue_date": "2024-04-22",
-    #     "due_date": "2024-04-29",
-    #     "days_issued": 7,
-    #     "return_date": None,
-    #     "status": "ISSUED"  # "ISSUED" or "RETURNED"
-    # }
+    
 }
 
-# Configuration dictionary for fine rates
+
 FINE_CONFIG = {
     "week_1": {"days": (1, 7), "rate": 10},
     "week_2": {"days": (8, 14), "rate": 20},
@@ -34,7 +16,7 @@ FINE_CONFIG = {
     "week_4": {"days": (22, 28), "rate": 40}
 }
 
-# ========== DICTIONARY UTILITY FUNCTIONS ==========
+
 
 def calculate_fine(days_overdue):
     """Calculate fine based on days overdue with escalating rates per week"""

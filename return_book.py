@@ -5,7 +5,6 @@ def return_book():
     """Return a book with fine calculation if overdue"""
     print_separator("RETURN BOOK")
     
-    # Get issued books
     pending_books = {k: v for k, v in issued_books.items() if v["status"] == "ISSUED"}
     
     if not pending_books:
@@ -28,7 +27,6 @@ def return_book():
     
     print()
     
-    # Get student name and book name for return
     while True:
         student_name = input("👤 Enter Student Name: ").strip().upper()
         if not student_name:
@@ -43,7 +41,6 @@ def return_book():
             continue
         break
     
-    # Find the matching record
     record_key = None
     matching_record = None
     
@@ -59,7 +56,6 @@ def return_book():
         print_separator()
         return
     
-    # Calculate fine if overdue
     return_date = datetime.now().strftime("%Y-%m-%d")
     due_date = datetime.strptime(matching_record["due_date"], "%Y-%m-%d")
     return_date_obj = datetime.strptime(return_date, "%Y-%m-%d")
@@ -67,15 +63,12 @@ def return_book():
     days_overdue = (return_date_obj - due_date).days
     fine = 0 if days_overdue <= 0 else calculate_fine(days_overdue)
     
-    # Update record
     issued_books[record_key]["return_date"] = return_date
     issued_books[record_key]["status"] = "RETURNED"
     
-    # Update book availability
     book_id = matching_record["book_id"]
     books[book_id]["issued_count"] -= 1
     
-    # Display return confirmation
     print("\n" + "="*60)
     if days_overdue <= 0:
         print("✅ BOOK RETURNED ON TIME!".center(60))
@@ -93,7 +86,6 @@ def return_book():
         print(f"💰 Fine Amount: ₹{fine}")
         print("\nFine Breakdown (escalating per week):")
         
-        # Show fine breakdown
         remaining_days = days_overdue
         week = 1
         day_count = 0

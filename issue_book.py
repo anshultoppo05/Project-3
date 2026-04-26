@@ -4,8 +4,6 @@ from utils import books, issued_books, print_separator
 def issue():
     """Issue a book to a student with tracking information"""
     print_separator("ISSUE BOOK")
-    
-    # Display available books
     available_books = {bid: book for bid, book in books.items() if book["copies"] - book["issued_count"] > 0}
     
     if not available_books:
@@ -21,8 +19,6 @@ def issue():
         print("{:<5} {:<40} {:<10}".format(book_id, book_info["name"][:38], available))
     
     print()
-    
-    # Get book ID
     while True:
         try:
             book_id = int(input("📖 Enter Book ID to Issue: "))
@@ -35,15 +31,13 @@ def issue():
     
     book_name = books[book_id]["name"]
     
-    # Get student name
     while True:
         student_name = input("👤 Enter Student Name: ").strip().upper()
         if not student_name:
             print("❌ Student name cannot be empty. Please try again.")
             continue
         break
-    
-    # Get number of days to issue for
+
     while True:
         try:
             days_issued = int(input("📅 Number of Days to Issue For (recommended: 7): "))
@@ -53,12 +47,9 @@ def issue():
             break
         except ValueError:
             print("❌ Please enter a valid number.")
-    
-    # Calculate dates
     issue_date = datetime.now().strftime("%Y-%m-%d")
     due_date = (datetime.now() + timedelta(days=days_issued)).strftime("%Y-%m-%d")
-    
-    # Create issue record
+
     record_key = f"{book_name}_{student_name}_{issue_date}"
     issued_books[record_key] = {
         "book_id": book_id,
@@ -71,10 +62,8 @@ def issue():
         "status": "ISSUED"
     }
     
-    # Update book issued count
     books[book_id]["issued_count"] += 1
     
-    # Display confirmation with fine notice
     print("\n" + "="*60)
     print("✅ BOOK ISSUED SUCCESSFULLY!".center(60))
     print("="*60)
